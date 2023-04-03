@@ -8,7 +8,6 @@ for (i = 0; i < myNodelist.length; i++) {
   span.appendChild(txt);
   myNodelist[i].appendChild(span);
 }
-
 // Click on a close button to hide the current list item
 var close = document.getElementsByClassName("close");
 var i;
@@ -23,10 +22,14 @@ for (i = 0; i < close.length; i++) {
 var list = document.querySelector('ul');
 list.addEventListener('click', function(ev) {
   if (ev.target.tagName === 'LI') {
+    var itemName = ev.target.textContent;
     ev.target.classList.toggle('checked');
+    const timestamp = new Date().getTime();
+    const todoItem = { itemName, timestamp };
+    todos.push(itemName);
   }
 }, false);
-
+const todos = [];
 // Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
@@ -46,6 +49,7 @@ function newElement() {
   span.appendChild(txt);
   li.appendChild(span);
 
+
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var div = this.parentElement;
@@ -53,10 +57,15 @@ function newElement() {
     }
   }
 }
-
-function ActualDate(){
-    var currentdate = new Date();
-    var datetime = currentdate.getDay() + "/" + currentdate.getMonth() + "/" + currentdate.getFullYear() + " & " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
-    console.log(datetime);
+function getFirstTodoItem() {
+  let firstItem = todos[0];
+  for (let i = 1; i < todos.length; i++) {
+    if (todos[i].timestamp < firstItem.timestamp) {
+      firstItem = todos[i];
+      var element = todos[i];
+    }
+  }
+  var nose = document.getElementById("ab");
+  var text = document.createTextNode(element);
+  nose.appendChild(text)
 }
-ActualDate();
