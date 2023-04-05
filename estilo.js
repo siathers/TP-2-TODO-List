@@ -1,3 +1,7 @@
+var int = 0;
+let cosas = [];
+let tiempos=[]; 
+let todos = [];
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -26,10 +30,11 @@ list.addEventListener('click', function(ev) {
     ev.target.classList.toggle('checked');
     const timestamp = new Date().getTime();
     const todoItem = { itemName, timestamp };
-    todos.push(itemName);
+    todos.push(ev.target.textContent);
+    console.log(ev.target.textContent)
   }
 }, false);
-const todos = [];
+
 // Create a new list item when clicking on the "Add" button
 function newElement() {
   var li = document.createElement("li");
@@ -40,6 +45,7 @@ function newElement() {
     alert("You must write something!");
   } else {
     document.getElementById("myUL").appendChild(li);
+    console.log(t);
   }
   document.getElementById("myInput").value = "";
 
@@ -48,8 +54,9 @@ function newElement() {
   span.className = "close";
   span.appendChild(txt);
   li.appendChild(span);
-
-
+  cosas.push(t);
+  const timestamp = new Date().getTime();
+  tiempos.push(timestamp);
   for (i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var div = this.parentElement;
@@ -57,15 +64,32 @@ function newElement() {
     }
   }
 }
+
 function getFirstTodoItem() {
   let firstItem = todos[0];
   for (let i = 1; i < todos.length; i++) {
     if (todos[i].timestamp < firstItem.timestamp) {
       firstItem = todos[i];
+      console.log(todos[i] )
       var element = todos[i];
     }
   }
   var nose = document.getElementById("ab");
   var text = document.createTextNode(element);
+  nose.appendChild(text)
+}
+
+function InicioFinTodoItem() {
+  let firstItem = todos[0];
+  for (let i = 1; i < todos.length; i++) {
+    if (todos[i].timestamp < todos[i - 1].timestamp) {
+      var itemName = ev.target.textContent;
+      const timestamp = new Date().getTime();
+      const todoItem = { itemName, timestamp };
+    }
+  }
+  var nose = document.getElementById("re");
+  var text = document.createTextNode(todoItem);
+  console.log(text)
   nose.appendChild(text)
 }
