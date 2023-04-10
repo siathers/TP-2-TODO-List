@@ -2,6 +2,7 @@ var int = 0;
 let cosas = [];
 let tiempos=[]; 
 let todos = [];
+let tiempos2 = [];
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
@@ -29,7 +30,12 @@ list.addEventListener('click', function(ev) {
     var itemName = ev.target.textContent;
     ev.target.classList.toggle('checked');
     const timestamp = new Date().getTime();
-    const todoItem = { itemName, timestamp };
+    for (i = 0; i < close.length; i++) {
+      if(ev.target.textContent==cosas[i].data)
+      {
+        tiempos2[i]=timestamp;
+      }
+    }
     todos.push(ev.target.textContent);
     console.log(ev.target.textContent)
   }
@@ -64,32 +70,15 @@ function newElement() {
     }
   }
 }
-
 function getFirstTodoItem() {
-  let firstItem = todos[0];
+var noseasda=cosas[0];
+var restatiempos=tiempos[0]-tiempos2[0];
   for (let i = 1; i < todos.length; i++) {
-    if (todos[i].timestamp < firstItem.timestamp) {
-      firstItem = todos[i];
-      console.log(todos[i] )
-      var element = todos[i];
+    if (restatiempos < tiempos[i]-tiempos2[i]) {
+      restatiempos=tiempos[i]-tiempos2[i]
+      noseasda=cosas[i]
     }
   }
-  var nose = document.getElementById("ab");
-  var text = document.createTextNode(element);
-  nose.appendChild(text)
+  document.getElementById("ab").innerText=noseasda.data;
 }
 
-function InicioFinTodoItem() {
-  let firstItem = todos[0];
-  for (let i = 1; i < todos.length; i++) {
-    if (todos[i].timestamp < todos[i - 1].timestamp) {
-      var itemName = ev.target.textContent;
-      const timestamp = new Date().getTime();
-      const todoItem = { itemName, timestamp };
-    }
-  }
-  var nose = document.getElementById("re");
-  var text = document.createTextNode(todoItem);
-  console.log(text)
-  nose.appendChild(text)
-}
